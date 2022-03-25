@@ -44,11 +44,13 @@ class Profile:
             self.love = get_program(opts, "love")
         if self.love == None:
             raise Exception("LOVE not found")
-        self.bb_rw_packer = os.getenv("BB_RW_PACKER")
+        self.bb_rw_packer = opts['packer']
         if self.bb_rw_packer == None:
-            self.bb_rw_packer = opts['packer']
+            self.bb_rw_packer = os.getenv("BB_RW_PACKER")
             if self.bb_rw_packer == None:
-                raise Exception("bb_rw_packer.love is not specified")
+                self.bb_rw_packer = utils.find_packerguin()
+                if self.bb_rw_packer == None:
+                    raise Exception("packerguin is not specified")
     def run_resize(self, image: bytes, width: int, height: int):
         process = subprocess.Popen(
             [self.magick, "convert", "png:-", "-resize", "{}x{}!".format(width, height), "-depth", "8", "png:-"],

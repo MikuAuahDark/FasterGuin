@@ -82,3 +82,27 @@ def rmkdir(path: str):
         os.makedirs(path)
     except FileExistsError:
         pass
+
+PACKERGUIN_STRUCTURE = [
+    "annot.lua",
+    "argparse.lua",
+    "conf.lua",
+    "JSON.lua",
+    "main.lua",
+    "mounter.lua",
+    "RTA/baseAtlas.lua",
+    "RTA/dynamicSize.lua",
+    "RTA/fixedSize.lua",
+    "RTA/init.lua",
+    "RTA/packing.lua",
+    "RTA/treeNode.lua",
+    "RTA/util.lua"
+]
+
+def find_packerguin():
+    path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../packerguin"))
+    for files in PACKERGUIN_STRUCTURE:
+        test = os.path.normpath(os.path.join(path, files))
+        if not os.path.isfile(test):
+            return None
+    return path

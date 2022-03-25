@@ -19,10 +19,11 @@ Requirements
 
 * [EtcTool](https://github.com/google/etc2comp) - ETC2 encoder required to run `low` profile (see below).
 
-Usage
+Running
 -----
 
-Please run `python -m fasterguin`.
+For the usage, please run `python fasterguin/main.py`. You can also install the package with
+`pip install .` if you want, but you'll lose ability to auto-find Packer Guin.
 
 Profiles
 -----

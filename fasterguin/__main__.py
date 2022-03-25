@@ -23,6 +23,12 @@ import os
 import shlex
 import sys
 
+if __name__ == "__main__" and __package__ is None:
+    # Copied from yt-dlp
+    path = os.path.realpath(os.path.abspath(__file__))
+    sys.path.insert(0, os.path.dirname(os.path.dirname(path)))
+    __package__ = "fasterguin"
+
 from . import utils
 from .asset import Asset
 from .options.base import UnsupportedOption
@@ -50,6 +56,7 @@ def process_command(cmddata: list[str], context: Asset):
     cmd.execute(context)
 
 def main(arg):
+    print(utils.find_packerguin())
     parser = argparse.ArgumentParser("program")
     parser.add_argument("input", help="Asset definition file.")
     parser.add_argument("output", help="Processed asset output directory.")

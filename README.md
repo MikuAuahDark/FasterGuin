@@ -1,18 +1,21 @@
 Faster Guin
 =====
 
-A texture packer utilizing (fork of) [Runtime-TextureAtlas](https://github.com/EngineerSmith/Runtime-TextureAtlas) using LÖVE and Python.
+A texture packer utilizing (fork of) [Runtime-TextureAtlas](https://github.com/EngineerSmith/Runtime-TextureAtlas)
+using LÖVE and Python.
 
 Requirements
 -----
 
 * LÖVE 11.x - to run `packerguin` folder.
 
-* Python 3.10 - tu run `fasterguin` module. 3.9 works but there's [issue](https://bugs.python.org/issue42233) with their typing module.
+* Python 3.10 - tu run `fasterguin` module. 3.9 works but there's
+[issue](https://bugs.python.org/issue42233) with their typing module.
 
 * ImageMagick 7 - ImageMagick 6 is **not** supported!
 
-* [ASTCEnc](https://github.com/ARM-software/astc-encoder) - ASTC encoder required to run `android` profile (see below).
+* [ASTCEnc](https://github.com/ARM-software/astc-encoder) - ASTC encoder required to run
+`android` profile (see below).
 
 * [EtcTool](https://github.com/google/etc2comp) - ETC2 encoder required to run `low` profile (see below).
 
@@ -87,7 +90,20 @@ Accepts [`algorithm`](#algorithm) option.
 
 ### `prefix`
 
-Set the output asset prefix for the metadata. `<input>` is the desired prefix.
+Set the output asset prefix for the metadata. `<input>` is the desired prefix. To illustrate
+how this parameter works, consider this LOVE game structure:
+
+```
+path/to/game
+|   conf.lua
+|   main.lua
++---assets
+|   |   image1.png
+|   |   image2.png
+```
+
+If you access your images with `assets/image1.png` and you set the output directory of the script
+to `path/to/game/assets`, then you need to specify `"assets"` as the prefix.
 
 Options
 -----
@@ -138,7 +154,35 @@ If this option is absent, the image is not resized.
 Packer Guin Input
 -----
 
-TODO
+The file format for `pack` command is as follows
+
+```
+output output.packed
+size 2048
+extrude -1
+prefix assets
+
+file <input>
+file <input>
+...
+file <input>
+
+folder <input>
+folder <input>
+...
+folder <input>
+```
+
+To explain, the `output` tells where to put the packed `.png` and the `.json` metadata
+containing the slice information relative to the output directory in the Python script.
+The `size` is the maximum square dimensions allowed for this particular texture atlas.
+`extrude` extrudes by specified amount of pixels, but if `-1` is specified, the best
+amount of pixels is computed for you (usually `ceil(log2(max(final_width, final_height)))`).
+Finally the `prefix` is same as [above](#prefix).
+
+After those information, one or more `file` or `folder` must be specified. `file` specify
+one image to be added to atlas and `folder` specify a directory of images to be added to
+atlas (non-recursive).
 
 License
 -----

@@ -1,0 +1,4 @@
+[submodule "packerguin/RTA"]
+	path = packerguin/RTA
+	url = https://github.com/MikuAuahDark/Runtime-TextureAtlas
+	branch = treenode

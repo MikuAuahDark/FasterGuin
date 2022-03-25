@@ -35,12 +35,13 @@ List of possible profiles:
 Input File Format
 -----
 
-The input file format is as follows:  
+The input file format is composed as one or more commands. The command pattern are:  
 ```
 <command> <input> [option_1 <value>] [option_2 <value>] ... [option_n <value>]
 ```
 
-In most cases, `<input>` is the input file in your raw assets directory.
+In most cases, `<input>` is the input file in your raw assets directory. `#` at beginning
+and empty lines are ignored.
 
 List of commands:
 
@@ -56,13 +57,13 @@ Copy file to the output path. `<input>` is the file to copy.
 
 Include image file as part of the assets. `<input>` is the image file.
 
-Accepts [`dimension`](###dimension) and [`resize`](###resize) options.
+Accepts [`dimension`](#dimension) and [`resize`](#resize) options.
 
 ### `folder`
 
 Include directory containing images **non-recursively** as part of the asets. `<input>` is the directory.
 
-Accepts [`destination`](###destination), [`dimension`](###dimension), and [`resize`](###resize) options.
+Accepts [`destination`](#destination), [`dimension`](#dimension), and [`resize`](#resize) options.
 
 ### `output`
 
@@ -82,7 +83,7 @@ The default is `metadata.json`.
 
 Run Packer Guin. `<input>` is the Packer Guin input file. See below for the file syntax.
 
-Accepts [`algorithm`](###algorithm) option.
+Accepts [`algorithm`](#algorithm) option.
 
 ### `prefix`
 
@@ -97,7 +98,7 @@ List of options:
 
 ### `algorithm`
 
-Set the packer algorithm for the [`pack`](###pack) command. Valid options are:
+Set the packer algorithm for the [`pack`](#pack) command. Valid options are:
 
 * `tree` - Use Tree node packing algorithm.
 
@@ -118,7 +119,7 @@ Set the assumed image dimensions. Valid values are:
 * `original` - Use the original image dimension as-is.
 
 If this option is absent, the image dimension is set to the original image or the
-resized image (if [`resize`](###resize) option is present).
+resized image (if [`resize`](#resize) option is present).
 
 ### `resize`
 

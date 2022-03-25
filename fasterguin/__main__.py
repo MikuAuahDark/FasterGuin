@@ -50,7 +50,7 @@ def process_command(cmddata: list[str], context: Asset):
     cmd.execute(context)
 
 def main(arg):
-    parser = argparse.ArgumentParser(arg[0])
+    parser = argparse.ArgumentParser("program")
     parser.add_argument("input", help="Asset definition file.")
     parser.add_argument("output", help="Processed asset output directory.")
     parser.add_argument("-d", "--directory", help="Unprocessed asset input directory.")

@@ -185,6 +185,10 @@ After those information, one or more `file` or `folder` must be specified. `file
 one image to be added to atlas and `folder` specify a directory of images to be added to
 atlas (non-recursive).
 
+Currently, you must place this Packer Guin file in the root folder of your input assets
+directory, usually in same directory as the input file for Faster Guin. This hopefully
+change in the future.
+
 License
 -----
 

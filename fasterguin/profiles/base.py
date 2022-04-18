@@ -41,7 +41,7 @@ class Profile:
             # In Windows, use lovec.exe
             self.love = utils.get_program(opts, "love", "lovec")
         else:
-            self.love = get_program(opts, "love")
+            self.love = utils.get_program(opts, "love")
         if self.love == None:
             raise Exception("LOVE not found")
         self.bb_rw_packer = opts['packer']

@@ -25,6 +25,9 @@ Running
 For the usage, please run `python fasterguin/main.py`. You can also install the package with
 `pip install .` if you want, but you'll lose ability to auto-find Packer Guin.
 
+Make sure you have cloned with submodules before running. For example, `git clone $URL --recurse-submodules`, 
+or run `git submodule update --init --recursive` if you have already cloned it.
+
 Profiles
 -----
 

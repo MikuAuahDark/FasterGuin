@@ -132,7 +132,8 @@ Set output destination relative to the output assets directory.
 
 ### `dimension`
 
-Set the assumed image dimensions. Valid values are:
+Set the assumed image dimensions, ie. what size the metadata reports the image to be. This can be used as reference for drawing the image at the appropriate size as defined by the original artwork.
+Valid values are:
 
 * `<w>x<h>` - Assume it's exactly specified.
 

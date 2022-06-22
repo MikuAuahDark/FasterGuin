@@ -19,6 +19,8 @@ Requirements
 
 * [EtcTool](https://github.com/google/etc2comp) - ETC2 encoder required to run `low` profile (see below).
 
+* (Optional) [Black](https://github.com/psf/black) - Code reformatter, with maximum lines of 120 (`-l 120`).
+
 Running
 -----
 

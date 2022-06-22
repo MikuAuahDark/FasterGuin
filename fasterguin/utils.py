@@ -113,3 +113,12 @@ def find_packerguin():
         if not os.path.isfile(test):
             return None
     return path
+
+
+def calculate_mipmaps(w: int, h: int):
+    result = [] # type: list[tuple[int, int]]
+    while w > 1 or h > 1:
+        w = max(w // 2, 1)
+        h = max(h // 2, 1)
+        result.append((w, h))
+    return result

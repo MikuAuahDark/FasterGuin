@@ -20,10 +20,11 @@
 
 from .base import Option
 
+
 class DestinationOption(Option):
     def __init__(self, name: str, value: str):
         Option.__init__(self, name, value)
-        if value[-1] != '/':
-            self.value = value + '/'
+        if value[-1] != "/":
+            self.value = value + "/"
         else:
             self.value = value

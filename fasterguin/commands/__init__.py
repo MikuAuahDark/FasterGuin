@@ -33,5 +33,5 @@ COMMAND_LIST = {
     "folder": FolderCommand,
     "output": OutputCommand,
     "pack": PackCommand,
-    "prefix": PrefixCommand
+    "prefix": PrefixCommand,
 }

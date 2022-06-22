@@ -31,17 +31,20 @@ from .file import FileCommand
 
 OPTS_LIST = (DimensionOption, ResizeOption)
 
+
 class FolderCommand(Command):
     def __init__(self, value: str):
         Command.__init__(self, value)
         # Ensure slashes
-        v = value.replace('\\', '/')
-        if v[-1] != '/':
-            self.value = v + '/'
+        v = value.replace("\\", "/")
+        if v[-1] != "/":
+            self.value = v + "/"
         else:
             self.value = v
+
     def accept_option(self, option: type):
         return option == DimensionOption or option == ResizeOption or option == DestinationOption
+
     def execute(self, context: Asset):
         files = []
         dest = self.get_option(DestinationOption)

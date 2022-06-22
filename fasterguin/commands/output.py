@@ -22,6 +22,7 @@ from ..asset import Asset
 
 from .base import Command
 
+
 class OutputCommand(Command):
     def execute(self, context: Asset):
         context.set_realsize_output(self.value)

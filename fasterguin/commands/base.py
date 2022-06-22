@@ -23,23 +23,29 @@ from ..options.base import Option, UnsupportedOption
 
 from typing import TypeVar
 
-T = TypeVar('T')
+T = TypeVar("T")
+
 
 class Command:
     def __init__(self, value: str):
         self.options = {}
         self.value = value
+
     def accept_option(self, option: type):
         return False
+
     def get_value(self):
         return self.value
+
     def add_option(self, option: Option):
         opttype = type(option)
         if self.accept_option(opttype):
             self.options[opttype] = option
         else:
             raise UnsupportedOption(option)
-    def get_option(self, option: type[T]) -> T|None:
+
+    def get_option(self, option: type[T]) -> T | None:
         return self.options.get(option)
+
     def execute(self, context: Asset):
         pass

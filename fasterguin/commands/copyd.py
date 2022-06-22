@@ -23,6 +23,7 @@ import shutil
 from ..asset import Asset
 from .base import Command
 
+
 class CopyDirectoryCommand(Command):
     def execute(self, context: Asset):
         inpath = context.get_input_path(self.value)

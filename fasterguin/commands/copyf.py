@@ -25,6 +25,7 @@ from .. import utils
 from ..asset import Asset
 from .base import Command
 
+
 class CopyFileCommand(Command):
     def execute(self, context: Asset):
         infile = context.get_input_path(self.value)

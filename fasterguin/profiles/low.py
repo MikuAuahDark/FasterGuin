@@ -27,6 +27,7 @@ import tempfile
 from .. import utils
 from .base import Profile
 
+
 class LowProfile(Profile):
     def __init__(self, opts: dict[str, str]):
         Profile.__init__(self, opts)
@@ -34,26 +35,34 @@ class LowProfile(Profile):
         self.etctool = utils.get_program(opts, "etctool", "EtcTool")
         if self.etctool == None:
             raise Exception("EtcTool not found")
+
     def run_compressor(self, image: bytes, destwoext: str):
         # Create temp output directory
         filename, _ = os.path.splitext(os.path.basename(tempfile.mktemp()))
         image_po2, po2size = self.make_po2(image)
         mipmaps = str(int(math.log2(po2size)) + 1)
         filenamepng = f"{filename}.png"
-        with open(filenamepng, 'wb') as f:
+        with open(filenamepng, "wb") as f:
             f.write(image_po2)
             f.close()
-        cmd = [self.etctool, filenamepng, "-format", "RGBA8", "-effort", "0", "-j", str(os.cpu_count()), "-m", mipmaps, "-output", f"{destwoext}.etc2.ktx"]
+        cmd = [
+            self.etctool,
+            filenamepng,
+            "-format",
+            "RGBA8",
+            "-effort",
+            "0",
+            "-j",
+            str(os.cpu_count()),
+            "-m",
+            mipmaps,
+            "-output",
+            f"{destwoext}.etc2.ktx",
+        ]
         success = False
         # etc2comp crashes sometimes, so try it 10 times
         for i in range(1, 11):
-            process = subprocess.Popen(
-                cmd,
-                0,
-                self.etctool,
-                subprocess.PIPE,
-                sys.stdout,
-                sys.stderr)
+            process = subprocess.Popen(cmd, 0, self.etctool, subprocess.PIPE, sys.stdout, sys.stderr)
             process.communicate(None)
             process.wait()
             if process.returncode == 0:

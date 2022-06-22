@@ -22,8 +22,4 @@ from .android import AndroidProfile
 from .low import LowProfile
 from .pc import PCProfile
 
-PROFILE_LIST = {
-    "android": AndroidProfile,
-    "low": LowProfile,
-    "pc": PCProfile
-}
+PROFILE_LIST = {"android": AndroidProfile, "low": LowProfile, "pc": PCProfile}

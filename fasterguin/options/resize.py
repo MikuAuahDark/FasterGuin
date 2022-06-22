@@ -22,29 +22,31 @@ import math
 
 from .base import Option
 
+
 class ResizeOption(Option):
     def __init__(self, name: str, value: str):
         Option.__init__(self, name, value)
         self.scaling = None
         self.width = None
         self.height = None
-        if value[-1] == '%':
+        if value[-1] == "%":
             try:
                 self.scaling = float(value[:-1]) / 100.0
             except ValueError:
                 raise Exception("Invalid resize value")
         else:
-            dimension = value.split('x')
+            dimension = value.split("x")
             if len(dimension) == 2:
                 try:
-                    if dimension[0] != '':
+                    if dimension[0] != "":
                         self.width = int(dimension[0])
-                    if dimension[1] != '':
+                    if dimension[1] != "":
                         self.height = int(dimension[1])
                     if self.width == None and self.height == None:
                         raise Exception("invalid")
                 except Exception:
                     raise Exception("Invalid resize value")
+
     def compute_size(self, width: int, height: int):
         # I still have no idea what rounding should be used, so I picked
         # ceil for now.

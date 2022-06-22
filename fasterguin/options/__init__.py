@@ -27,5 +27,5 @@ OPTION_LIST = {
     "algorithm": AlgorithmOption,
     "destination": DestinationOption,
     "dimension": DimensionOption,
-    "resize": ResizeOption
+    "resize": ResizeOption,
 }

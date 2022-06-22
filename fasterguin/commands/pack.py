@@ -23,9 +23,11 @@ from ..options.algorithm import AlgorithmOption
 
 from .base import Command
 
+
 class PackCommand(Command):
     def accept_option(self, option: type):
         return option == AlgorithmOption
+
     def execute(self, context: Asset):
         algo = self.get_option(AlgorithmOption)
         profile = context.get_profile()
@@ -34,8 +36,9 @@ class PackCommand(Command):
             context.get_input_path(self.value),
             context.get_output_path(),
             True,
-            'grid' if algo == None else algo.get_value())
+            "grid" if algo == None else algo.get_value(),
+        )
         w, h = profile.run_compressor(png, output)
         for img in images:
             context.register_image(img)
-        context.add_real_size(context.to_relative_output(output) + '.png', w, h, w, h)
+        context.add_real_size(context.to_relative_output(output) + ".png", w, h, w, h)

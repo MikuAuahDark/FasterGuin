@@ -27,23 +27,28 @@ from ..options.resize import ResizeOption
 
 from .base import Command
 
+
 class FileCommand(Command):
     def __init__(self, value: str):
         Command.__init__(self, value)
         self.outdir_override = None
+
     def set_output_override(self, outdir_override: str):
         self.outdir_override = outdir_override
+
     def get_output_filename(self):
         if self.outdir_override != None:
             return self.outdir_override + os.path.basename(self.value)
         else:
             return self.value
+
     def accept_option(self, option: type):
         return option == DimensionOption or option == ResizeOption
+
     def execute(self, context: Asset):
         dimension = self.get_option(DimensionOption)
         resize = self.get_option(ResizeOption)
-        with open(context.get_input_path(self.value), 'rb') as f:
+        with open(context.get_input_path(self.value), "rb") as f:
             png = f.read()
         profile = context.get_profile()
         print(f"Processing {self.value}")

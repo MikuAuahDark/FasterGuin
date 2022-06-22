@@ -26,6 +26,7 @@ import tempfile
 from .. import utils
 from .base import Profile
 
+
 class AndroidProfile(Profile):
     def __init__(self, opts: dict[str, str]):
         Profile.__init__(self, opts)
@@ -33,10 +34,11 @@ class AndroidProfile(Profile):
         self.astcenc = utils.get_program(opts, "astcenc", "astcenc")
         if self.astcenc == None:
             raise Exception("astcenc not found")
+
     def run_compressor(self, image: bytes, destwoext: str):
         image_po2, po2size = self.make_po2(image)
         filename, _ = os.path.splitext(os.path.basename(tempfile.mktemp()))
-        with open(filename, 'wb') as f:
+        with open(filename, "wb") as f:
             f.write(image_po2)
             f.close()
         process = subprocess.Popen(
@@ -45,7 +47,8 @@ class AndroidProfile(Profile):
             self.astcenc,
             subprocess.PIPE,
             sys.stdout,
-            sys.stderr)
+            sys.stderr,
+        )
         process.communicate(None)
         process.wait()
         os.remove(filename)

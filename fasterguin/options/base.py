@@ -18,14 +18,18 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
+
 class Option:
     def __init__(self, name: str, value: str):
         self.name = name
         self.value = value
+
     def get_name(self):
         return self.name
+
     def get_value(self):
         return self.value
+
 
 class UnsupportedOption(Exception):
     def __init__(self, option: Option):

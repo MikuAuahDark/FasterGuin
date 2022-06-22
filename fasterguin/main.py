@@ -35,6 +35,7 @@ from .options.base import UnsupportedOption
 
 from . import COMMAND_LIST, OPTION_LIST, PROFILE_LIST
 
+
 def process_command(cmddata: list[str], context: Asset):
     # Parse command
     cmd_name = cmddata[0].lower()
@@ -55,12 +56,13 @@ def process_command(cmddata: list[str], context: Asset):
             raise Exception(f"Command '{cmd_name}': {e}")
     cmd.execute(context)
 
+
 def main(arg):
     parser = argparse.ArgumentParser("program")
     parser.add_argument("input", help="Asset definition file.")
     parser.add_argument("output", help="Processed asset output directory.")
     parser.add_argument("-d", "--directory", help="Unprocessed asset input directory.")
-    parser.add_argument("-p", "--profile", help="Asset processing profile.", choices=PROFILE_LIST.keys(), default='pc')
+    parser.add_argument("-p", "--profile", help="Asset processing profile.", choices=PROFILE_LIST.keys(), default="pc")
     parser.add_argument("--astcenc", help="astcenc executable.")
     parser.add_argument("--etctool", help="EtcTool executable.")
     parser.add_argument("--love", help="LOVE executable.")
@@ -69,11 +71,11 @@ def main(arg):
     # Parse args
     args = parser.parse_args(arg[1:])
     opts = {
-        'astcenc': args.astcenc,
-        'etctool': args.etctool,
-        'magick': args.magick,
-        'love': args.love,
-        'packer': args.packer
+        "astcenc": args.astcenc,
+        "etctool": args.etctool,
+        "magick": args.magick,
+        "love": args.love,
+        "packer": args.packer,
     }
     profile = PROFILE_LIST[args.profile](opts)
     asset = Asset(profile)
@@ -85,7 +87,7 @@ def main(arg):
     utils.rmkdir(output_abs)
     # Start parsing
     line_count = 0
-    with open(args.input, 'r', encoding='UTF-8') as f:
+    with open(args.input, "r", encoding="UTF-8") as f:
         for line in f:
             line_count = line_count + 1
             line = line.strip()
@@ -99,9 +101,10 @@ def main(arg):
                         raise e
     # Write metadata
     realsize = asset.get_output_path(asset.get_realsize_output())
-    with open(realsize, 'w', encoding='UTF-8') as f:
+    with open(realsize, "w", encoding="UTF-8") as f:
         print(f"Writing {realsize}")
         asset.dump_real_size(f)
+
 
 if __name__ == "__main__":
     main(sys.argv)

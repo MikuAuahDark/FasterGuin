@@ -20,6 +20,7 @@
 
 from .base import Option
 
+
 class AlgorithmOption(Option):
     def __init__(self, name: str, value: str):
         Option.__init__(self, name, value)

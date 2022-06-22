@@ -22,6 +22,7 @@ from ..asset import Asset
 
 from .base import Command
 
+
 class PrefixCommand(Command):
     def execute(self, context: Asset):
         context.set_prefix(self.value)

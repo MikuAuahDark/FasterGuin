@@ -23,10 +23,11 @@ import io
 from .. import utils
 from .base import Profile
 
+
 class PCProfile(Profile):
     def run_compressor(self, image: bytes, destwoext: str):
         # Just write PNG
-        with open(f"{destwoext}.png", 'wb+') as f:
+        with open(f"{destwoext}.png", "wb+") as f:
             f.write(image)
             f.seek(0, io.SEEK_SET)
             return utils.size_probe(f)

@@ -22,7 +22,8 @@ import re
 
 from .base import Option
 
-DIMENSION_MATCH = re.compile(r'^(\d+)x(\d+)$')
+DIMENSION_MATCH = re.compile(r"^(\d+)x(\d+)$")
+
 
 class DimensionOption(Option):
     def __init__(self, name: str, value: str):
@@ -38,5 +39,6 @@ class DimensionOption(Option):
                     self.dimensions = (width, height)
                     return
             raise Exception("Invalid dimensions")
+
     def get_dimensions(self):
         return self.dimensions

@@ -27,11 +27,17 @@ from .. import utils
 from .base import Profile
 
 
+POSSIBLE_ASTCENC = ["astcenc", "astcenc-avx2", "astcenc-sse4.1", "astcenc-sse2", "astcenc-neon"]
+
+
 class AndroidProfile(Profile):
     def __init__(self, opts: dict[str, str]):
         Profile.__init__(self, opts)
         # Search astcenc
-        self.astcenc = utils.get_program(opts, "astcenc", "astcenc")
+        for astcenc in POSSIBLE_ASTCENC:
+            self.astcenc = utils.get_program(opts, "astcenc", astcenc)
+            if self.astcenc is not None:
+                break
         if self.astcenc == None:
             raise Exception("astcenc not found")
 

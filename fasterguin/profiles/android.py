@@ -37,7 +37,7 @@ class AndroidProfile(Profile):
 
     def run_compressor(self, image: bytes, destwoext: str):
         image_po2, po2size = self.make_po2(image)
-        filename, _ = os.path.splitext(os.path.basename(tempfile.mktemp()))
+        filename = os.path.basename(tempfile.mktemp(".png"))
         with open(filename, "wb") as f:
             f.write(image_po2)
             f.close()

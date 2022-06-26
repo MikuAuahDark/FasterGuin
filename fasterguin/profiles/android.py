@@ -27,7 +27,7 @@ from .. import utils
 from .base import Profile
 
 
-POSSIBLE_ASTCENC = ["astcenc", "astcenc-avx2", "astcenc-sse4.1", "astcenc-sse2", "astcenc-neon"]
+POSSIBLE_ASTCENC = ["astcenc", "astcenc-avx2", "astcenc-sse4.1", "astcenc-sse2", "astcenc-neon", "astcenc-native"]
 
 
 class AndroidProfile(Profile):

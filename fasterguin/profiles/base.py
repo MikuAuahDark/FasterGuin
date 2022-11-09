@@ -110,7 +110,7 @@ class Profile:
         process.wait()
         if process.returncode != 0:
             utils.print_to_stderr(result)
-            raise Exception("Packer failed")
+            raise Exception(f"Packer failed with exit code {process.returncode}")
         result_str = str(result, "UTF-8")
         out = re.findall(PACKER_OUTPUT_MATCH, result_str)
         # output[1] is the PNG, output[2] is the JSON

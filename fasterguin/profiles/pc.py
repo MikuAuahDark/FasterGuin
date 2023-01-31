@@ -25,9 +25,17 @@ from .base import Profile
 
 
 class PCProfile(Profile):
-    def run_compressor(self, image: bytes, destwoext: str):
-        # Just write PNG
-        with open(f"{destwoext}.png", "wb+") as f:
-            f.write(image)
-            f.seek(0, io.SEEK_SET)
-            return utils.size_probe(f)
+    def run_compressor(self, image: bytes, destwoext: str, mipmap: bool = False):
+        sizes = utils.size_probe(image)
+        assert sizes is not None
+        (w, h) = sizes
+        if mipmap:
+            mips = self.create_resized_mip(image)
+            for i in range(len(mips)):
+                with open(f"{destwoext}-mipmap{i + 1}.png", "wb+") as f:
+                    f.write(mips[i])
+        else:
+            # Just write PNG
+            with open(f"{destwoext}.png", "wb+") as f:
+                f.write(image)
+        return w, h

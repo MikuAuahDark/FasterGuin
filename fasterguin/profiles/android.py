@@ -41,7 +41,7 @@ class AndroidProfile(Profile):
         if self.astcenc == None:
             raise Exception("astcenc not found")
 
-    def run_compressor(self, image: bytes, destwoext: str):
+    def run_compressor(self, image: bytes, destwoext: str, mipmap: bool = False):
         image_po2, po2size = self.make_po2(image)
         filename = os.path.basename(tempfile.mktemp(".png"))
         with open(filename, "wb") as f:

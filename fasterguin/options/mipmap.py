@@ -18,28 +18,17 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-from ..asset import Asset
-from ..options.algorithm import AlgorithmOption
-from ..options.mipmap import MipmapOption
-
-from .base import Command
+from .base import Option
 
 
-class PackCommand(Command):
-    def accept_option(self, option: type):
-        return option in (AlgorithmOption, MipmapOption)
+class MipmapOption(Option):
+    def __init__(self, name: str, value: str):
+        Option.__init__(self, name, value)
+        lower = value.lower()
+        if lower in ("1", "yes", "true"):
+            self.mipmap = True
+        elif value.lower() in ("0", "no", "false"):
+            self.mipmap = False
 
-    def execute(self, context: Asset):
-        algo = self.get_option(AlgorithmOption)
-        profile = context.get_profile()
-        print(f"Packing {self.value}")
-        images, output, png = profile.run_packer(
-            context.get_input_path(self.value),
-            context.get_output_path(),
-            True,
-            "grid" if algo == None else algo.get_value(),
-        )
-        w, h = profile.run_compressor(png, output)
-        for img in images:
-            context.register_image(img)
-        context.add_real_size(context.to_relative_output(output) + ".png", w, h, w, h)
+    def get_mipmap(self):
+        return self.mipmap

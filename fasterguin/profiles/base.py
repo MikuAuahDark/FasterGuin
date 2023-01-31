@@ -125,6 +125,18 @@ class Profile:
         filename, _ = os.path.splitext(out_png)
         return (images, filename, output_png)
 
-    def run_compressor(self, image: bytes, destwoext: str) -> Tuple[int, int]:
+    def run_compressor(self, image: bytes, destwoext: str, mipmap: bool = False) -> Tuple[int, int]:
         # Implementation must override this
         raise NotImplementedError("compression is not implemented")
+
+    def create_resized_mip(self, image: bytes):
+        sizes = utils.size_probe(image)
+        assert sizes is not None
+        (w, h) = sizes
+        mips = utils.calculate_mipmaps(w, h)
+        result = [image]
+        lastpng = image
+        for sw, sh in mips[1:]:
+            lastpng = self.run_resize(lastpng, sw, sh)
+            result.append(lastpng)
+        return result

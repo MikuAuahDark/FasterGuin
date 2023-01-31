@@ -36,7 +36,7 @@ class LowProfile(Profile):
         if self.etctool == None:
             raise Exception("EtcTool not found")
 
-    def run_compressor(self, image: bytes, destwoext: str):
+    def run_compressor(self, image: bytes, destwoext: str, mipmap: bool = False):
         # Create temp output directory
         filename, _ = os.path.splitext(os.path.basename(tempfile.mktemp()))
         image_po2, po2size = self.make_po2(image)

@@ -21,11 +21,13 @@
 from .algorithm import AlgorithmOption
 from .destination import DestinationOption
 from .dimension import DimensionOption
+from .mipmap import MipmapOption
 from .resize import ResizeOption
 
 OPTION_LIST = {
     "algorithm": AlgorithmOption,
     "destination": DestinationOption,
     "dimension": DimensionOption,
+    "mipmap": MipmapOption,
     "resize": ResizeOption,
 }

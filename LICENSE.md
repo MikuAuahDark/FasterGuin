@@ -1,7 +1,7 @@
 The MIT License (MIT)
 =====================
 
-Copyright © 2022 Boba Birds Developers
+Copyright © 2023 Boba Birds Developers
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

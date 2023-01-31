@@ -23,6 +23,7 @@ import os
 from .. import utils
 from ..asset import Asset
 from ..options.dimension import DimensionOption
+from ..options.mipmap import MipmapOption
 from ..options.resize import ResizeOption
 
 from .base import Command
@@ -48,6 +49,7 @@ class FileCommand(Command):
     def execute(self, context: Asset):
         dimension = self.get_option(DimensionOption)
         resize = self.get_option(ResizeOption)
+        mips = self.get_option(MipmapOption)
         with open(context.get_input_path(self.value), "rb") as f:
             png = f.read()
         profile = context.get_profile()
@@ -68,5 +70,5 @@ class FileCommand(Command):
         outpath = context.get_output_path(out)
         utils.rmkdir(os.path.dirname(outpath))
         outwoext, _ = os.path.splitext(outpath)
-        profile.run_compressor(png, outwoext)
+        profile.run_compressor(png, outwoext, mips is not None and mips.get_mipmap())
         context.add_real_size(out, ow, oh, rw, rh)

@@ -24,12 +24,13 @@ from .. import utils
 from ..asset import Asset
 from ..options.destination import DestinationOption
 from ..options.dimension import DimensionOption
+from ..options.mipmap import MipmapOption
 from ..options.resize import ResizeOption
 
 from .base import Command
 from .file import FileCommand
 
-OPTS_LIST = (DimensionOption, ResizeOption)
+OPTS_LIST = (DimensionOption, ResizeOption, MipmapOption)
 
 
 class FolderCommand(Command):
@@ -43,7 +44,7 @@ class FolderCommand(Command):
             self.value = v
 
     def accept_option(self, option: type):
-        return option == DimensionOption or option == ResizeOption or option == DestinationOption
+        return option is DestinationOption or option in OPTS_LIST
 
     def execute(self, context: Asset):
         files = []

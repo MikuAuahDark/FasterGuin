@@ -65,6 +65,7 @@ def main(arg):
     parser.add_argument("-p", "--profile", help="Asset processing profile.", choices=PROFILE_LIST.keys(), default="pc")
     parser.add_argument("--astcenc", help="astcenc executable.")
     parser.add_argument("--etctool", help="EtcTool executable.")
+    parser.add_argument("--etcpak", help="etcpak executable.")
     parser.add_argument("--love", help="LOVE executable.")
     parser.add_argument("--magick", help="ImageMagick executable.")
     parser.add_argument("--packer", help="packerguin path/.love file.")
@@ -72,6 +73,7 @@ def main(arg):
     args = parser.parse_args(arg[1:])
     opts = {
         "astcenc": args.astcenc,
+        "etcpak": args.etcpak,
         "etctool": args.etctool,
         "magick": args.magick,
         "love": args.love,

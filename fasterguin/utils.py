@@ -34,7 +34,7 @@ def concat_path(a: str, b: str):
     return path
 
 
-def get_program(opts: dict[str, str], key: str, name: str = None):
+def get_program(opts: dict[str, str], key: str, name: str | None = None):
     result = opts[key]
     if result == None:
         result = shutil.which(name or key)
@@ -47,8 +47,8 @@ def print_to_stderr(text: bytes):
         print(t, file=sys.stdout)
 
 
-def size_probe(f: IO[bytes] | bytes):
-    if type(f) == bytes:
+def size_probe(f: io.BytesIO | bytes):
+    if isinstance(f, bytes):
         f = io.BytesIO(f)
         f.seek(0, io.SEEK_SET)
     header = f.read(4)
@@ -116,7 +116,7 @@ def find_packerguin():
 
 
 def calculate_mipmaps(w: int, h: int):
-    result = [] # type: list[tuple[int, int]]
+    result = []  # type: list[tuple[int, int]]
     while w > 1 or h > 1:
         w = max(w // 2, 1)
         h = max(h // 2, 1)

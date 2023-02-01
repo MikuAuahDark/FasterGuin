@@ -70,5 +70,5 @@ class FileCommand(Command):
         outpath = context.get_output_path(out)
         utils.rmkdir(os.path.dirname(outpath))
         outwoext, _ = os.path.splitext(outpath)
-        profile.run_compressor(png, outwoext, mips is not None and mips.get_mipmap())
+        profile.run_compressor(png, outwoext, mips.get_mipmap() if mips is not None else context.get_mipmap())
         context.add_real_size(out, ow, oh, rw, rh)

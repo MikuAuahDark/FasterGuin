@@ -31,7 +31,7 @@ class PackCommand(Command):
 
     def execute(self, context: Asset):
         algo = self.get_option(AlgorithmOption)
-        mip = self.get_option(MipmapOption)
+        mips = self.get_option(MipmapOption)
         profile = context.get_profile()
         print(f"Packing {self.value}")
         images, output, png = profile.run_packer(
@@ -40,7 +40,7 @@ class PackCommand(Command):
             True,
             "grid" if algo == None else algo.get_value(),
         )
-        w, h = profile.run_compressor(png, output, mip is not None and mip.get_mipmap())
+        w, h = profile.run_compressor(png, output, mips.get_mipmap() if mips is not None else context.get_mipmap())
         for img in images:
             context.register_image(img)
         context.add_real_size(context.to_relative_output(output) + ".png", w, h, w, h)

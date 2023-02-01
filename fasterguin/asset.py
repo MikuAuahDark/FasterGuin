@@ -34,6 +34,7 @@ class Asset:
         self.real_sizes = {}
         self.real_size_out = "metadata.json"
         self.registered_images = set()
+        self.mipmapping = False
 
     def set_input_directory(self, path: str):
         self.input = os.path.abspath(path)
@@ -102,3 +103,9 @@ class Asset:
 
     def set_realsize_output(self, out: str):
         self.real_size_out = out
+
+    def get_mipmap(self):
+        return self.mipmapping
+
+    def enable_mipmap(self):
+        self.mipmapping = True

@@ -18,22 +18,18 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-from .copyd import CopyDirectoryCommand
-from .copyf import CopyFileCommand
-from .enable import EnableCommand
-from .file import FileCommand
-from .folder import FolderCommand
-from .output import OutputCommand
-from .pack import PackCommand
-from .prefix import PrefixCommand
+from ..asset import Asset
 
-COMMAND_LIST = {
-    "copyd": CopyDirectoryCommand,
-    "copyf": CopyFileCommand,
-    "enable": EnableCommand,
-    "file": FileCommand,
-    "folder": FolderCommand,
-    "output": OutputCommand,
-    "pack": PackCommand,
-    "prefix": PrefixCommand,
-}
+from .base import Command
+
+
+class EnableCommand(Command):
+    def __init__(self, value: str):
+        Command.__init__(self, value)
+        self.value = value.lower()
+
+    def execute(self, context: Asset):
+        if self.value == "mipmap":
+            context.enable_mipmap()
+        elif self.value == "zopfli":
+            raise Exception("placeholder")

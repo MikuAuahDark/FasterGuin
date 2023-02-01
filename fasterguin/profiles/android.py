@@ -43,12 +43,21 @@ class AndroidProfile(Profile):
 
     def run_compressor(self, image: bytes, destwoext: str, mipmap: bool = False):
         image_po2, po2size = self.make_po2(image)
+        if mipmap:
+            mips = self.create_resized_mip(image_po2)
+            for i in range(len(mips)):
+                self.run_compressor_single(mips[i], f"{destwoext}.astc-mipmap{i+1}.ktx")
+        else:
+            self.run_compressor_single(image_po2, f"{destwoext}.astc.ktx")
+        return (po2size, po2size)
+
+    def run_compressor_single(self, png: bytes, dest: str):
         filename = os.path.basename(tempfile.mktemp(".png"))
         with open(filename, "wb") as f:
-            f.write(image_po2)
+            f.write(png)
             f.close()
         process = subprocess.Popen(
-            [self.astcenc, "-cl", filename, f"{destwoext}.astc.ktx", "4x4", "100", "-silent"],
+            [self.astcenc, "-cl", filename, dest, "4x4", "100", "-silent"],
             0,
             self.astcenc,
             subprocess.PIPE,
@@ -60,4 +69,3 @@ class AndroidProfile(Profile):
         os.remove(filename)
         if process.returncode != 0:
             raise Exception("astcenc failed")
-        return (po2size, po2size)

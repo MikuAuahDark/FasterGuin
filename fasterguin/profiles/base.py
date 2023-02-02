@@ -136,7 +136,7 @@ class Profile:
         mips = utils.calculate_mipmaps(w, h)
         result = [image]
         lastpng = image
-        for sw, sh in mips[1:]:
+        for sw, sh in mips:
             lastpng = self.run_resize(lastpng, sw, sh)
             result.append(lastpng)
         return result
